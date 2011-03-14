@@ -1,0 +1,20 @@
+{
+  "name": "ios7crypt",
+  "description": "Encrypt and decrypt Cisco IOS7 passwords",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mcandre/node-ios7crypt.git"
+  },
+  "author": "Andrew Pennebaker <andrew.pennebaker@gmail.com> (http://www.yellosoft.us/)",
+  "main": "ios7crypt",
+  "directories": {
+    "lib": "."
+  },
+  "scripts": {
+    "test": "test()"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
