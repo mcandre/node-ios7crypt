@@ -6,7 +6,10 @@ var
 	_ = require("underscore"),
 	sprintf = require("sprintf").sprintf,
 	qc = require("quickcheck"),
-	argv = require("optimist").argv;
+	argv = require("optimist").argv,
+	paperboy = require("paperboy"),
+	path = require("path"),
+	webroot = path.dirname(__filename);
 
 //
 // Until underscore adds zipWith
@@ -134,24 +137,57 @@ function page(req) {
 	var query = url.parse(req.url, true).query;
 
 	var
-		password = query.encrypt,
-		hash = query.decrypt;
+		password = query.password,
+		hash = query.hash;
 
 	if (password != undefined) {
-		return encrypt(password);
+		hash = encrypt(password);
 	}
 	else if (hash != undefined) {
-		return decrypt(hash);
+		password = decrypt(hash);
 	}
 	else {
-		return "no query";
+		password = "";
+		hash = "";
 	}
+
+	return "<!DOCTYPE html>" +
+		"<head>" +
+		"<title>IOS7Crypt</title><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" />" +
+		"<link rel=\"favorites icon\" href=\"/favicon.ico\" />" +
+		"</head>" +
+		"<body onload=\"document.getElementById('password').focus();\">" +
+		"<style type=\"text/css\" />" +
+		"body { text-align: center; }" +
+		"a { color: #000; }" +
+		"a:visited { color: #000; }" +
+		"#logo { font-size: 500%; }" +
+		"#crypto_form { display: block; margin: 5% auto; width: 300px; }" +
+		"label { display: block; float: left; width: 5%; padding-right: 1%; }" +
+		"#github { position: fixed; bottom: 1em; right: 1em; }" +
+		"</style>" +
+		"<h1 id=\"logo\"><a href=\"/\">IOS7Crypt</a></h1>" +
+		"<div id=\"crypto_form\"" +
+		"<form action=\"\" method=\"get\">" +
+		"<p><label for=\"password\">Password</label> <input id=\"password\" type=\"text\" name=\"password\" value=\"" + password + "\" /></p>" +
+		"</form>" +
+		"<form action=\"\" method=\"get\">" +
+		"<p><label for=\"hash\">Hash</label> <input id=\"hash\" type=\"text\" name=\"hash\" value=\"" + hash + "\" /></p>" +
+		"</form>" +
+		"</div>" +
+		"<div id=\"github\"><a href=\"https://github.com/mcandre/node-ios7crypt\">GitHub</a></div>" +
+		"</body></html";
 }
 
 function server() {
 	http.createServer(function (req, res) {
-		res.writeHead(200);
-		res.end(page(req));
+		if (req.url == "/favicon.ico") {
+			paperboy.deliver(webroot, req, res);
+		}
+		else {
+			res.writeHead(200, {"Content-Type": "text/html"});
+			res.end(page(req));
+		}
 	}).listen(8124, "localhost");
 
 	console.log("Server running at http://localhost:8124/");
