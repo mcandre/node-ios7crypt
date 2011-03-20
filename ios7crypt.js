@@ -188,9 +188,9 @@ function server() {
 			res.writeHead(200, {"Content-Type": "text/html"});
 			res.end(page(req));
 		}
-	}).listen(8124, "localhost");
+	}).listen(8125, "localhost");
 
-	console.log("Server running at http://localhost:8124/");
+	console.log("Server running at http://localhost:8125/");
 }
 
 exports.server = server;
