@@ -167,13 +167,16 @@ function page(req) {
 		"#github { position: fixed; bottom: 1em; right: 1em; }" +
 		"</style>" +
 		"<h1 id=\"logo\"><a href=\"/\">IOS7Crypt</a></h1>" +
-		"<div id=\"crypto_form\"" +
+		"<div id=\"crypto_form\">" +
+
 		"<form action=\"\" method=\"get\">" +
 		"<p><label for=\"password\">Password</label> <input id=\"password\" type=\"text\" name=\"password\" value=\"" + password + "\" /></p>" +
 		"</form>" +
+
 		"<form action=\"\" method=\"get\">" +
 		"<p><label for=\"hash\">Hash</label> <input id=\"hash\" type=\"text\" name=\"hash\" value=\"" + hash + "\" /></p>" +
 		"</form>" +
+
 		"</div>" +
 		"<div id=\"github\"><a href=\"https://github.com/mcandre/node-ios7crypt\">GitHub</a></div>" +
 		"</body></html";
@@ -208,10 +211,22 @@ exports.usage = usage;
 
 function main() {
 	if ("e" in argv) {
-		console.log(encrypt(argv["e"]));
+		var password = argv["e"];
+		if (password == undefined) {
+			usage();
+		}
+		else {
+			console.log(encrypt(password));
+		}
 	}
 	else if ("d" in argv) {
-		console.log(decrypt(argv["d"]));
+		var hash = argv["d"];
+		if (hash == undefined) {
+			usage();
+		}
+		else {
+			console.log(decrypt(hash));
+		}
 	}
 	else if ("t" in argv) {
 		test();
