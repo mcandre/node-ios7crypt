@@ -5,7 +5,8 @@ var
 	url = require("url"),
 	_ = require("underscore"),
 	sprintf = require("sprintf").sprintf,
-	qc = require("quickcheck");
+	qc = require("quickcheck"),
+	argv = require("optimist").argv;
 
 //
 // Until underscore adds zipWith
@@ -140,13 +141,36 @@ function page(req) {
 	}
 }
 
-function main() {
+function server() {
 	http.createServer(function (req, res) {
 		res.writeHead(200);
 		res.end(page(req));
 	}).listen(8124, "localhost");
 
 	console.log("Server running at http://localhost:8124/");
+}
+
+function usage() {
+	console.log("ios7crypt.js [options]");
+	console.log("-e <password>\tEncrypt");
+	console.log("-d <hash>\tDecrypt");
+	console.log("-t\t\tTest");
+	console.log("-h\t\tUsage");
+}
+
+function main() {
+	if ("e" in argv) {
+		console.log(encrypt(argv["e"]));
+	}
+	else if ("d" in argv) {
+		console.log(decrypt(argv["d"]));
+	}
+	else if ("t" in argv) {
+		test();
+	}
+	else {
+		usage();
+	}
 }
 
 if (!module.parent) { main(); }
