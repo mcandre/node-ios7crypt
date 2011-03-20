@@ -11,11 +11,14 @@ var
 //
 // Until underscore adds zipWith
 //
+
 var slice = Array.prototype.slice;
+
 function zipWith(f) {
 	var args = _.zip.apply(null, slice.call(arguments, 1));
 	return args.map(function (arg) { return f.apply(null, arg); });
 }
+
 exports.zipWith = zipWith;
 
 var xlatPrime = [
@@ -108,6 +111,8 @@ function decrypt(hash) {
 	}
 }
 
+exports.decrypt = decrypt;
+
 function propReversible(password) {
 	if (password.length > 1) {
 		return decrypt(encrypt(password)) == password;
@@ -116,6 +121,8 @@ function propReversible(password) {
 		return true;
 	}
 }
+
+exports.propReversible = propReversible;
 
 function test() {
 	return qc.forAll(propReversible, qc.arbString);
@@ -150,13 +157,18 @@ function server() {
 	console.log("Server running at http://localhost:8124/");
 }
 
+exports.server = server;
+
 function usage() {
 	console.log("ios7crypt.js [options]");
 	console.log("-e <password>\tEncrypt");
 	console.log("-d <hash>\tDecrypt");
 	console.log("-t\t\tTest");
+	console.log("-s\t\tServer");
 	console.log("-h\t\tUsage");
 }
+
+exports.usage = usage;
 
 function main() {
 	if ("e" in argv) {
@@ -167,6 +179,9 @@ function main() {
 	}
 	else if ("t" in argv) {
 		test();
+	}
+	else if ("s" in argv) {
+		server();
 	}
 	else {
 		usage();
