@@ -11,4 +11,4 @@ REQUIREMENTS
   - Underscore
   - Sprintf
   - Quickcheck
-  - Optimist
+  - Optimist 0.1.7

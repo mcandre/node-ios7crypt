@@ -6,7 +6,7 @@ var
 	_ = require("underscore"),
 	sprintf = require("sprintf").sprintf,
 	qc = require("quickcheck"),
-	argv = require("optimist").argv,
+	argv = require("optimist").string("e", "d").argv,
 	paperboy = require("paperboy"),
 	path = require("path"),
 	webroot = path.dirname(__filename);
