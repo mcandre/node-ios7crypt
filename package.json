@@ -16,5 +16,12 @@
   },
   "engines": {
     "node": "*"
+  },
+  "dependencies": {
+    "optimist": "0.1.7",
+    "paperboy": "0.0.2",
+    "underscore": "1.1.5",
+    "sprintf": "0.1.1",
+    "quickcheck": "0.0.0"
   }
 }
