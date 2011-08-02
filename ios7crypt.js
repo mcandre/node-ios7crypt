@@ -46,13 +46,11 @@ function xlat(index, len) {
 exports.xlat = xlat;
 
 function encrypt(password) {
-	var seed = Math.floor(Math.random() * 15);
-
-	var plainBytes = password.split("").map(function (x) { return x.charCodeAt(0); });
-
-	var keyBytes = xlat(seed, plainBytes.length);
-
-	var cipherBytes = zipWith(function(a, b) { return a ^ b; }, plainBytes, keyBytes);
+	var
+		seed = Math.floor(Math.random() * 15),
+		plainBytes = password.split("").map(function (x) { return x.charCodeAt(0); }),
+		keyBytes = xlat(seed, plainBytes.length),
+		cipherBytes = zipWith(function(a, b) { return a ^ b; }, plainBytes, keyBytes);
 
 	return sprintf("%02d%s", seed, cipherBytes.map(function (h) { return sprintf("%02x", h); }).join(""));
 }
@@ -93,22 +91,18 @@ function decrypt(hash) {
 		return "";
 	}
 	else {
-		var
-			seed = hash.slice(0, 2),
-			hash = hash.slice(2, hash.length);
+		var seed = hash.slice(0, 2);
+
+		hash = hash.slice(2, hash.length);
 
 		seed = parseInt(seed, 10);
 		if (isNaN(seed) || seed < 0 || seed > 15) { return ""; }
 
-		var ps = pairs(hash);
-
-		var cipherBytes = ps.map(function (h) { return parseInt(h, 16); });
-
-		cipherBytes = validBytes(cipherBytes);
-
-		var keyBytes = xlat(seed, cipherBytes.length);
-
-		var plainBytes = zipWith(function(a, b) { return a ^ b; }, cipherBytes, keyBytes);
+		var
+			ps = pairs(hash),
+			cipherBytes = validBytes(ps.map(function (h) { return parseInt(h, 16); })),
+			keyBytes = xlat(seed, cipherBytes.length),
+			plainBytes = zipWith(function(a, b) { return a ^ b; }, cipherBytes, keyBytes);
 
 		return plainBytes.map(function (x) { return String.fromCharCode(x); }).join("");
 	}
@@ -118,7 +112,7 @@ exports.decrypt = decrypt;
 
 function propReversible(password) {
 	if (password.length > 1) {
-		return decrypt(encrypt(password)) == password;
+		return decrypt(encrypt(password)) === password;
 	}
 	else {
 		return true;
@@ -134,16 +128,15 @@ function test() {
 exports.test = test;
 
 function page(req) {
-	var query = url.parse(req.url, true).query;
-
 	var
+		query = url.parse(req.url, true).query,
 		password = query.password,
 		hash = query.hash;
 
-	if (password != undefined) {
+	if (password !== undefined) {
 		hash = encrypt(password);
 	}
-	else if (hash != undefined) {
+	else if (hash !== undefined) {
 		password = decrypt(hash);
 	}
 	else {
@@ -184,7 +177,7 @@ function page(req) {
 
 function server() {
 	http.createServer(function (req, res) {
-		if (req.url == "/favicon.ico") {
+		if (req.url === "/favicon.ico") {
 			paperboy.deliver(webroot, req, res);
 		}
 		else {
@@ -211,8 +204,9 @@ exports.usage = usage;
 
 function main() {
 	if ("e" in argv) {
-		var password = argv["e"];
-		if (password == undefined) {
+		var password = argv.e;
+
+		if (password === undefined) {
 			usage();
 		}
 		else {
@@ -220,8 +214,9 @@ function main() {
 		}
 	}
 	else if ("d" in argv) {
-		var hash = argv["d"];
-		if (hash == undefined) {
+		var hash = argv.d;
+
+		if (hash === undefined) {
 			usage();
 		}
 		else {
