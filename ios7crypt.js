@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/*jslint nodejs:true */
 
 var
 	http = require("http"),
@@ -87,22 +88,28 @@ function validBytes(array) {
 exports.validBytes = validBytes;
 
 function decrypt(hash) {
+	var
+		seed,
+		ps,
+		cipherBytes,
+		keyBytes,
+		plainBytes;
+
 	if (hash.length < 4) {
 		return "";
 	}
 	else {
-		var seed = hash.slice(0, 2);
+		seed = hash.slice(0, 2);
 
 		hash = hash.slice(2, hash.length);
 
 		seed = parseInt(seed, 10);
 		if (isNaN(seed) || seed < 0 || seed > 15) { return ""; }
 
-		var
-			ps = pairs(hash),
-			cipherBytes = validBytes(ps.map(function (h) { return parseInt(h, 16); })),
-			keyBytes = xlat(seed, cipherBytes.length),
-			plainBytes = zipWith(function(a, b) { return a ^ b; }, cipherBytes, keyBytes);
+		ps = pairs(hash);
+		cipherBytes = validBytes(ps.map(function (h) { return parseInt(h, 16); }));
+		keyBytes = xlat(seed, cipherBytes.length);
+		plainBytes = zipWith(function(a, b) { return a ^ b; }, cipherBytes, keyBytes);
 
 		return plainBytes.map(function (x) { return String.fromCharCode(x); }).join("");
 	}
@@ -203,8 +210,12 @@ function usage() {
 exports.usage = usage;
 
 function main() {
+	var
+		password,
+		hash;
+
 	if ("e" in argv) {
-		var password = argv.e;
+		password = argv.e;
 
 		if (password === undefined) {
 			usage();
@@ -214,7 +225,7 @@ function main() {
 		}
 	}
 	else if ("d" in argv) {
-		var hash = argv.d;
+		hash = argv.d;
 
 		if (hash === undefined) {
 			usage();
