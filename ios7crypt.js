@@ -4,26 +4,13 @@
 var
 	http = require("http"),
 	url = require("url"),
-	_ = require("underscore"),
+	zipwith = require("zipwith").zipwith,
 	sprintf = require("sprintf").sprintf,
 	qc = require("quickcheck"),
 	argv = require("optimist").string("e", "d").argv,
 	paperboy = require("paperboy"),
 	path = require("path"),
 	webroot = path.dirname(__filename);
-
-//
-// Until underscore adds zipWith
-//
-
-var slice = Array.prototype.slice;
-
-function zipWith(f) {
-	var args = _.zip.apply(null, slice.call(arguments, 1));
-	return args.map(function (arg) { return f.apply(null, arg); });
-}
-
-exports.zipWith = zipWith;
 
 var xlatPrime = [
 	0x64, 0x73, 0x66, 0x64, 0x3b, 0x6b, 0x66, 0x6f,
@@ -51,7 +38,7 @@ function encrypt(password) {
 		seed = Math.floor(Math.random() * 15),
 		plainBytes = password.split("").map(function (x) { return x.charCodeAt(0); }),
 		keyBytes = xlat(seed, plainBytes.length),
-		cipherBytes = zipWith(function(a, b) { return a ^ b; }, plainBytes, keyBytes);
+		cipherBytes = zipwith(function(a, b) { return a ^ b; }, plainBytes, keyBytes);
 
 	return sprintf("%02d%s", seed, cipherBytes.map(function (h) { return sprintf("%02x", h); }).join(""));
 }
@@ -109,7 +96,7 @@ function decrypt(hash) {
 		ps = pairs(hash);
 		cipherBytes = validBytes(ps.map(function (h) { return parseInt(h, 16); }));
 		keyBytes = xlat(seed, cipherBytes.length);
-		plainBytes = zipWith(function(a, b) { return a ^ b; }, cipherBytes, keyBytes);
+		plainBytes = zipwith(function(a, b) { return a ^ b; }, cipherBytes, keyBytes);
 
 		return plainBytes.map(function (x) { return String.fromCharCode(x); }).join("");
 	}

@@ -7,7 +7,7 @@ REQUIREMENTS
   - Node.js
   - Npm
   - Paperboy
-  - Underscore
+  - [zipwith](http://search.npmjs.org/#/zipwith)
   - Sprintf
   - Quickcheck
   - Optimist 0.1.7
