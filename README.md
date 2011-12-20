@@ -1,13 +1,14 @@
-ios7crypt - Encrypt and decrypt Cisco IOS7 passwords
+# ios7crypt - Encrypt and decrypt Cisco IOS7 passwords
 
-[HOMEPAGE](http://ios7.yellosoft.us/)
+## HOMEPAGE
 
-REQUIREMENTS
+[http://ios7.yellosoft.us/](http://ios7.yellosoft.us/)
 
-  - Node.js
-  - Npm
-  - Paperboy
+## REQUIREMENTS
+
+  - [Node.js](http://nodejs.org/)
+  - [Paperboy](http://search.npmjs.org/#/paperboy)
   - [zipwith](http://search.npmjs.org/#/zipwith)
-  - Sprintf
-  - Quickcheck
-  - Optimist 0.1.7
+  - [Sprintf](http://search.npmjs.org/#/sprintf)
+  - [Quickcheck](http://search.npmjs.org/#/quickcheck)
+  - [Optimist](http://search.npmjs.org/#/optimist)
