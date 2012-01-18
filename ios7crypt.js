@@ -8,7 +8,6 @@ var
 	sprintf = require("sprintf").sprintf,
 	qc = require("quickcheck"),
 	argv = require("optimist").string("e", "d").argv,
-	paperboy = require("paperboy"),
 	path = require("path"),
 	webroot = path.dirname(__filename);
 
@@ -121,27 +120,10 @@ function test() {
 
 exports.test = test;
 
-function page(req) {
-	var
-		query = url.parse(req.url, true).query,
-		password = query.password,
-		hash = query.hash;
-
-	if (password !== undefined) {
-		hash = encrypt(password);
-	}
-	else if (hash !== undefined) {
-		password = decrypt(hash);
-	}
-	else {
-		password = "";
-		hash = "";
-	}
-
+function page(url, password, hash) {
 	return "<!DOCTYPE html>" +
 		"<head>" +
 		"<title>IOS7Crypt</title><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" />" +
-		"<link rel=\"favorites icon\" href=\"/favicon.ico\" />" +
 		"</head>" +
 		"<body onload=\"document.getElementById('password').focus();\">" +
 		"<style type=\"text/css\" />" +
@@ -151,6 +133,7 @@ function page(req) {
 		"#logo { font-size: 500%; }" +
 		"#crypto_form { display: block; margin: 5% auto; width: 300px; }" +
 		"label { display: block; float: left; width: 5%; padding-right: 1%; }" +
+		"#formats { position: fixed; bottom: 1em; left: 1em; }" +
 		"#github { position: fixed; bottom: 1em; right: 1em; }" +
 		"</style>" +
 		"<h1 id=\"logo\"><a href=\"/\">IOS7Crypt</a></h1>" +
@@ -165,22 +148,64 @@ function page(req) {
 		"</form>" +
 
 		"</div>" +
+		"<div id=\"formats\">Other formats: <a href=\"" + ("/ios7crypt.json" + url) + "&format=json\">JSON</a></div>" +
 		"<div id=\"github\"><a href=\"https://github.com/mcandre/node-ios7crypt\">GitHub</a></div>" +
 		"</body></html";
 }
 
+exports.page = page;
+
+function json(password, hash) {
+	return JSON.stringify({ password: password, hash: hash });
+}
+
+exports.json = json;
+
+var port = 8125;
+
 function server() {
 	http.createServer(function (req, res) {
-		if (req.url === "/favicon.ico") {
-			paperboy.deliver(webroot, req, res);
+		var
+			query = url.parse(req.url, true).query,
+			format = query.format || "html",
+			password = query.password,
+			hash = query.hash,
+			myurl = "";
+
+		if (password !== undefined) {
+			myurl += "?password=" + password;
+			hash = encrypt(password);
+		}
+		else if (hash !== undefined) {
+			myurl += "?hash=" + hash;
+			password = decrypt(hash);
 		}
 		else {
-			res.writeHead(200, {"Content-Type": "text/html"});
-			res.end(page(req));
+			password = "";
+			hash = "";
 		}
-	}).listen(8125, "localhost");
 
-	console.log("Server running at http://localhost:8125/");
+		var mimetype = "";
+		if (format == "html") {
+			mimetype = "text/html";
+		}
+		else if (format == "json") {
+			mimetype = "text/json";
+		}
+
+		var output = "";
+		if (format == "html") {
+			output = page(myurl, password, hash);
+		}
+		else if (format == "json") {
+			output = json(password, hash);
+		}
+
+		res.writeHead(200, {"Content-Type": mimetype});
+		res.end(output);
+	}).listen(port, "localhost");
+
+	console.log("Server running at http://localhost:" + port + "/");
 }
 
 exports.server = server;
