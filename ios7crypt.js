@@ -121,7 +121,7 @@ function test() {
 exports.test = test;
 
 function page(url, password, hash) {
-	return "<!DOCTYPE html>" +
+	var html = "<!DOCTYPE html>" +
 		"<head>" +
 		"<title>IOS7Crypt</title><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" />" +
 		"</head>" +
@@ -147,10 +147,16 @@ function page(url, password, hash) {
 		"<p><label for=\"hash\">Hash</label> <input id=\"hash\" type=\"text\" name=\"hash\" value=\"" + hash + "\" /></p>" +
 		"</form>" +
 
-		"</div>" +
-		"<div id=\"formats\">Other formats: <a href=\"" + ("/ios7crypt.json" + url) + "&format=json\">JSON</a></div>" +
-		"<div id=\"github\"><a href=\"https://github.com/mcandre/node-ios7crypt\">GitHub</a></div>" +
+		"</div>";
+
+	if (url != "") {
+		html += "<div id=\"formats\">Other formats: <a href=\"" + ("/ios7crypt.json" + url) + "&format=json\">JSON</a></div>";
+	}
+
+	html += "<div id=\"github\"><a href=\"https://github.com/mcandre/node-ios7crypt\">GitHub</a></div>" +
 		"</body></html";
+
+	return html;
 }
 
 exports.page = page;
