@@ -150,7 +150,11 @@ function page(url, password, hash) {
 		"</div>";
 
 	if (url != "") {
-		html += "<div id=\"formats\">Other formats: <a href=\"" + ("/ios7crypt.json" + url) + "&format=json\">JSON</a></div>";
+		html += "<div id=\"formats\">Other formats: " +
+			"<a href=\"" + ("/ios7crypt.json" + url) + "&format=json\">JSON</a>" +
+			" " +
+			"<a href=\"" + ("/ios7crypt.txt" + url) + "&format=txt\">TXT</a>" +
+			"</div>";
 	}
 
 	html += "<div id=\"github\"><a href=\"https://github.com/mcandre/node-ios7crypt\">GitHub</a></div>" +
@@ -166,6 +170,13 @@ function json(password, hash) {
 }
 
 exports.json = json;
+
+function txt(password, hash) {
+	return "Password:\t" + password + "\n" +
+		"Hash:\t\t" + hash;
+}
+
+exports.txt = txt;
 
 var port = 8125;
 
@@ -198,6 +209,9 @@ function server() {
 		else if (format == "json") {
 			mimetype = "text/json";
 		}
+		else if (format == "txt") {
+			mimetype = "text/plain";
+		}
 
 		var output = "";
 		if (format == "html") {
@@ -205,6 +219,9 @@ function server() {
 		}
 		else if (format == "json") {
 			output = json(password, hash);
+		}
+		else if (format == "txt") {
+			output = txt(password, hash);
 		}
 
 		res.writeHead(200, {"Content-Type": mimetype});
