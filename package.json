@@ -1,7 +1,7 @@
 {
   "name": "ios7crypt",
   "description": "Encrypt and decrypt Cisco IOS7 passwords",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "repository": {
     "type": "git",
     "url": "git://github.com/mcandre/node-ios7crypt.git"
@@ -21,6 +21,8 @@
     "optimist": "0.1.7",
     "zipwith": "0.0.1",
     "sprintf": "0.1.1",
-    "quickcheck": "0.0.0"
+    "quickcheck": "0.0.0",
+	"yamlish": "0.0.2",
+	"data2xml": "0.4.0"
   }
 }

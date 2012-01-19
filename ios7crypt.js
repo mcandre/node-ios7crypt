@@ -9,6 +9,8 @@ var
 	qc = require("quickcheck"),
 	argv = require("optimist").string("e", "d").argv,
 	path = require("path"),
+	yamlish = require("yamlish"),
+	data2xml = require("data2xml"),
 	webroot = path.dirname(__filename);
 
 var xlatPrime = [
@@ -153,6 +155,10 @@ function page(url, password, hash) {
 		html += "<div id=\"formats\">Other formats: " +
 			"<a href=\"" + ("/ios7crypt.json" + url) + "&format=json\">JSON</a>" +
 			" " +
+			"<a href=\"" + ("/ios7crypt.yaml" + url) + "&format=yaml\">YAML</a>" +
+			" " +
+			"<a href=\"" + ("/ios7crypt.xml" + url) + "&format=xml\">XML</a>" +
+			" " +
 			"<a href=\"" + ("/ios7crypt.txt" + url) + "&format=txt\">TXT</a>" +
 			"</div>";
 	}
@@ -170,6 +176,18 @@ function json(password, hash) {
 }
 
 exports.json = json;
+
+function yaml(password, hash) {
+	return yamlish.encode({ password: password, hash: hash });
+}
+
+exports.yaml = yaml;
+
+function xml(password, hash) {
+	return data2xml("ios7crypt", { password: password, hash: hash });
+}
+
+exports.xml = xml;
 
 function txt(password, hash) {
 	return "Password:\t" + password + "\n" +
@@ -209,9 +227,17 @@ function server() {
 		else if (format == "json") {
 			mimetype = "text/json";
 		}
+		else if (format == "yaml") {
+			mimetype = "text/yaml";
+		}
+		else if (format == "xml") {
+			mimetype = "application/xml";
+		}
 		else if (format == "txt") {
 			mimetype = "text/plain";
 		}
+
+		res.writeHead(200, {"Content-Type": mimetype});
 
 		var output = "";
 		if (format == "html") {
@@ -220,11 +246,16 @@ function server() {
 		else if (format == "json") {
 			output = json(password, hash);
 		}
+		else if (format == "yaml") {
+			output = yaml(password, hash);
+		}
+		else if (format == "xml") {
+			output = xml(password, hash);
+		}
 		else if (format == "txt") {
 			output = txt(password, hash);
 		}
 
-		res.writeHead(200, {"Content-Type": mimetype});
 		res.end(output);
 	}).listen(port, "localhost");
 
