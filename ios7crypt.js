@@ -11,6 +11,7 @@ var
 	path = require("path"),
 	yamlish = require("yamlish"),
 	data2xml = require("data2xml"),
+	ini = require("ini"),
 	webroot = path.dirname(__filename);
 
 var xlatPrime = [
@@ -122,7 +123,7 @@ function test() {
 
 exports.test = test;
 
-function page(url, password, hash) {
+function formatHTML(url, password, hash) {
 	var html = "<!DOCTYPE html>" +
 		"<head>" +
 		"<title>IOS7Crypt</title><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" />" +
@@ -159,6 +160,8 @@ function page(url, password, hash) {
 			" " +
 			"<a href=\"" + ("/ios7crypt.xml" + url) + "&format=xml\">XML</a>" +
 			" " +
+			"<a href=\"" + ("/ios7crypt.ini" + url) + "&format=ini\">INI</a>" +
+			" " +
 			"<a href=\"" + ("/ios7crypt.txt" + url) + "&format=txt\">TXT</a>" +
 			"</div>";
 	}
@@ -169,32 +172,38 @@ function page(url, password, hash) {
 	return html;
 }
 
-exports.page = page;
+exports.formatHTML = formatHTML;
 
-function json(password, hash) {
+function formatJSON(password, hash) {
 	return JSON.stringify({ password: password, hash: hash });
 }
 
-exports.json = json;
+exports.formatJSON = formatJSON;
 
-function yaml(password, hash) {
+function formatYAML(password, hash) {
 	return yamlish.encode({ password: password, hash: hash });
 }
 
-exports.yaml = yaml;
+exports.formatYAML = formatYAML;
 
-function xml(password, hash) {
+function formatXML(password, hash) {
 	return data2xml("ios7crypt", { password: password, hash: hash });
 }
 
-exports.xml = xml;
+exports.formatXML = formatXML;
 
-function txt(password, hash) {
+function formatINI(password, hash) {
+	return ini.encode({ password: password, hash: hash });
+}
+
+exports.formatINI = formatINI;
+
+function formatTXT(password, hash) {
 	return "Password:\t" + password + "\n" +
 		"Hash:\t\t" + hash;
 }
 
-exports.txt = txt;
+exports.formatTXT = formatTXT;
 
 var port = 8125;
 
@@ -233,6 +242,9 @@ function server() {
 		else if (format == "xml") {
 			mimetype = "application/xml";
 		}
+		else if (format == "ini") {
+			mimetype = "application/octet-stream";
+		}
 		else if (format == "txt") {
 			mimetype = "text/plain";
 		}
@@ -241,19 +253,22 @@ function server() {
 
 		var output = "";
 		if (format == "html") {
-			output = page(myurl, password, hash);
+			output = formatHTML(myurl, password, hash);
 		}
 		else if (format == "json") {
-			output = json(password, hash);
+			output = formatJSON(password, hash);
 		}
 		else if (format == "yaml") {
-			output = yaml(password, hash);
+			output = formatYAML(password, hash);
 		}
 		else if (format == "xml") {
-			output = xml(password, hash);
+			output = formatXML(password, hash);
+		}
+		else if (format == "ini") {
+			output = formatINI(password, hash);
 		}
 		else if (format == "txt") {
-			output = txt(password, hash);
+			output = formatTXT(password, hash);
 		}
 
 		res.end(output);
