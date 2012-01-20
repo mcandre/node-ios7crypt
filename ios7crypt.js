@@ -136,8 +136,8 @@ function formatHTML(url, password, hash) {
 		"#logo { font-size: 500%; }" +
 		"#crypto_form { display: block; margin: 5% auto; width: 300px; }" +
 		"label { display: block; float: left; width: 5%; padding-right: 1%; }" +
-		"#formats { position: fixed; bottom: 1em; left: 1em; }" +
-		"#github { position: fixed; bottom: 1em; right: 1em; }" +
+		"#formats { position: fixed; bottom: 2em; left: 1em; }" +
+		"#github { position: fixed; bottom: 2em; right: 1em; }" +
 		"</style>" +
 		"<h1 id=\"logo\"><a href=\"/\">IOS7Crypt</a></h1>" +
 		"<div id=\"crypto_form\">" +
