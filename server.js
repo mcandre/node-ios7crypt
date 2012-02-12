@@ -51,7 +51,7 @@ function formatHTML(url, password, hash) {
 	}
 
 	html += "<div id=\"github\"><a href=\"https://github.com/mcandre/node-ios7crypt\">GitHub</a></div>" +
-		"</body></html";
+		"</body></html>";
 
 	return html;
 }
