@@ -99,7 +99,6 @@ function decrypt(hash) {
 	}
 }
 
-<<<<<<< HEAD
 exports.decrypt = decrypt;
 
 function propReversible(password) {
