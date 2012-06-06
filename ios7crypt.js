@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /*jslint nodejs:true */
 
 var
@@ -273,52 +272,3 @@ function server() {
 }
 
 exports.server = server;
-
-function usage() {
-	console.log("ios7crypt.js [options]");
-	console.log("-e <password>\tEncrypt");
-	console.log("-d <hash>\tDecrypt");
-	console.log("-t\t\tTest");
-	console.log("-s\t\tServer");
-	console.log("-h\t\tUsage");
-}
-
-exports.usage = usage;
-
-function main() {
-	var
-		password,
-		hash;
-
-	if ("e" in argv) {
-		password = argv.e;
-
-		if (password === undefined || password == true) {
-			usage();
-		}
-		else {
-			console.log(encrypt(password));
-		}
-	}
-	else if ("d" in argv) {
-		hash = argv.d;
-
-		if (hash === undefined || hash == true) {
-			usage();
-		}
-		else {
-			console.log(decrypt(hash));
-		}
-	}
-	else if ("t" in argv) {
-		test();
-	}
-	else if ("s" in argv) {
-		server();
-	}
-	else {
-		usage();
-	}
-}
-
-if (!module.parent) { main(); }
