@@ -4,8 +4,7 @@
 var
 	http = require("http"),
 	url = require("url"),
-	ios7crypt = require("./ios7crypt"),
-	webroot = path.dirname(__filename);
+	ios7crypt = require("./ios7crypt");
 
 function formatHTML(url, password, hash) {
 	var html = "<!DOCTYPE html>" +
@@ -89,7 +88,7 @@ function formatTXT(password, hash) {
 
 exports.formatTXT = formatTXT;
 
-var port = 80;
+var port = 8125;
 
 function server() {
 	http.createServer(function (req, res) {
