@@ -298,7 +298,7 @@ function main() {
 	if ("e" in argv) {
 		password = argv.e;
 
-		if (password === undefined) {
+		if (password === undefined || password == true) {
 			usage();
 		}
 		else {
@@ -308,7 +308,7 @@ function main() {
 	else if ("d" in argv) {
 		hash = argv.d;
 
-		if (hash === undefined) {
+		if (hash === undefined || hash == true) {
 			usage();
 		}
 		else {
