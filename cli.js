@@ -2,8 +2,9 @@
 /*jslint nodejs:true */
 
 var
-	argv = require("optimist").string("e", "d").argv,
+	argv = require("optimist").string("e", "d", "t", "h", "v").argv,
 	qc = require("quickcheck"),
+	pkginfo = require("pkginfo")(module, 'version'),
 	ios7crypt = require("./ios7crypt");
 
 function propReversible(password) {
@@ -29,6 +30,7 @@ function usage() {
 	console.log("-d <hash>\tDecrypt");
 	console.log("-t\t\tTest");
 	console.log("-h\t\tUsage");
+	console.log("-v\t\tVersion info");
 }
 
 exports.usage = usage;
@@ -60,6 +62,9 @@ function main() {
 	}
 	else if ("t" in argv) {
 		test();
+	}
+	else if ("v" in argv) {
+		console.log(module.exports.version);
 	}
 	else {
 		usage();
