@@ -22,9 +22,9 @@
     "zipwith": "~0.0.1",
     "sprintf": "~0.1.1",
     "quickcheck": "~0.0.0",
-  	"yamlish": "~0.0.2",
-  	"data2xml": "~0.4.0",
-  	"ini": "~1.0.2",
+    "yamlish": "~0.0.2",
+    "data2xml": "~0.4.0",
+    "ini": "~1.0.2",
     "pkginfo": "~0.3.0"
   }
 }
