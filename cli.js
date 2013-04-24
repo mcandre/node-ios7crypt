@@ -3,7 +3,7 @@
 var
 argv = require("optimist").string("e", "d", "t", "h", "v").argv,
 qc = require("quickcheck"),
-pkginfo = require("pkginfo")(module, 'version'),
+pkginfo = require("pkginfo")(module, "version"),
 ios7crypt = require("./ios7crypt");
 
 function propReversible(password) {
