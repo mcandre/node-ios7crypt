@@ -89,6 +89,15 @@ exports.formatTXT = formatTXT;
 
 var port = 8125;
 
+var format2mimetype = {
+  html: "text/html",
+  json: "text/json",
+  txt: "text/plain",
+  yaml: "text/yaml",
+  xml: "application/xml",
+  ini: "application/octet-stream"
+};
+
 function server() {
   http.createServer(function (req, res) {
     var
@@ -112,44 +121,25 @@ function server() {
       hash = "";
     }
 
-    if (format == "html") {
-      mimetype = "text/html";
-    }
-    else if (format == "json") {
-      mimetype = "text/json";
-    }
-    else if (format == "yaml") {
-      mimetype = "text/yaml";
-    }
-    else if (format == "xml") {
-      mimetype = "application/xml";
-    }
-    else if (format == "ini") {
-      mimetype = "application/octet-stream";
-    }
-    else if (format == "txt") {
-      mimetype = "text/plain";
-    }
-
-    res.writeHead(200, {"Content-Type": mimetype});
+    res.writeHead(200, {"Content-Type": format2mimetype[format]});
 
     var output = "";
-    if (format == "html") {
+    if (format === "html") {
       output = formatHTML(myurl, password, hash);
     }
-    else if (format == "json") {
+    else if (format === "json") {
       output = formatJSON(password, hash);
     }
-    else if (format == "yaml") {
+    else if (format === "yaml") {
       output = formatYAML(password, hash);
     }
-    else if (format == "xml") {
+    else if (format === "xml") {
       output = formatXML(password, hash);
     }
-    else if (format == "ini") {
+    else if (format === "ini") {
       output = formatINI(password, hash);
     }
-    else if (format == "txt") {
+    else if (format === "txt") {
       output = formatTXT(password, hash);
     }
 
