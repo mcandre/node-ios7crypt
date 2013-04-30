@@ -1,2 +1,2 @@
---ignore-file=.gitignore
---ignore-dir=node_modules
+--ignore-file=is:.gitignore
+--ignore-dir=is:node_modules
