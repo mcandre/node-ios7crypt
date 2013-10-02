@@ -17,6 +17,9 @@
   "engines": {
     "node": "*"
   },
+  "scripts": {
+    "lint": "jshint ."
+  },
   "dependencies": {
     "optimist": "~0.1.7",
     "zipwith": "~0.0.1",
@@ -26,5 +29,8 @@
     "data2xml": "~0.4.0",
     "ini": "~1.0.2",
     "pkginfo": "~0.3.0"
+  },
+  "devDependencies": {
+    "jshint": ">=2.1.2"
   }
 }
