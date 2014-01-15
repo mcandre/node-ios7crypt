@@ -1,5 +1,5 @@
 guard :shell do
-  watch(/.*\.(csslintrc|js|css|html)/) do |m|
+  watch(/.*\.(jshintrc|jshintignore|csslintrc|js|json|css|html)/) do |m|
     title = 'Lint'
     msg = `npm run-script lint`
     status = ($?.success? && :success) || :failed
