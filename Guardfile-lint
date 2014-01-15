@@ -1,0 +1,10 @@
+guard :shell do
+  watch(/.*\.(js|css|html)/) do |m|
+    title = 'Lint'
+    msg = `npm run-script lint`
+    status = ($?.success? && :success) || :failed
+
+    n msg, title, status
+    "-> #{msg}"
+  end
+end
