@@ -26,7 +26,24 @@ http://ios7.yellosoft.us/
 
 # TESTING
 
-Ensure the example script works as expected:
+## Logic
+
+Ensure the ios7crypt logic works as expected:
+
+    $ npm test
+
+    > ios7crypt@0.0.10 test /Users/andrew/Desktop/src/node-ios7crypt
+    > mocha
+
+
+      +++ OK, passed 100 tests.
+    ․
+
+      1 passing (37ms)
+
+## CLI
+
+Ensure the CLI works as expected:
 
     $ bundle
     $ cucumber
