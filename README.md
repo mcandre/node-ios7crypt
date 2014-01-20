@@ -40,10 +40,9 @@ Ensure the ios7crypt logic works as expected:
     > mocha
 
 
-      +++ OK, passed 100 tests.
-    ․
+      ․
 
-      1 passing (37ms)
+      1 passing (36ms)
 
 ## CLI
 

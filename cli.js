@@ -10,7 +10,6 @@ function usage() {
   console.log("cli.js [options]");
   console.log("-e <password>\tEncrypt");
   console.log("-d <hash>\tDecrypt");
-  console.log("-t\t\tTest");
   console.log("-h\t\tUsage");
   console.log("-v\t\tVersion info");
 }

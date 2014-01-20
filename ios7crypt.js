@@ -98,20 +98,3 @@ function decrypt(hash) {
 }
 
 exports.decrypt = decrypt;
-
-function propReversible(password) {
-  if (password.length > 1) {
-    return decrypt(encrypt(password)) === password;
-  }
-  else {
-    return true;
-  }
-}
-
-exports.propReversible = propReversible;
-
-function test() {
-  return qc.forAll(propReversible, qc.arbString);
-}
-
-exports.test = test;
