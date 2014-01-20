@@ -24,6 +24,10 @@ http://ios7.yellosoft.us/
 * [Cucumber](http://cukes.info/)
 * [Guard](http://guardgem.org/)
 
+# INSTALL
+
+    $ npm install ios7crypt
+
 # TESTING
 
 ## Logic
@@ -57,24 +61,17 @@ Ensure the CLI works as expected:
     2 steps (2 passed)
     0m0.142s
 
-Guard can automatically run testing when the code changes:
-
-    $ bundle
-    $ guard -G Guardfile-cucumber
-    ...
-
-# INSTALL
-
-    $ npm install ios7crypt
-
 # LINT
 
 Keep the code tidy:
 
     $ npm run-script lint
 
-Guard can automatically lint when the code changes:
+# GUARD
+
+Guard can automatically check for compliance on file change:
 
     $ bundle
+    $ guard -G Guardfile-test
+    $ guard -G Guardfile-cucumber
     $ guard -G Guardfile-lint
-    ...
