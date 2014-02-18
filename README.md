@@ -3,11 +3,14 @@
 # EXAMPLE
 
     $ npm install
-    $ make test
-    node cli.js -e monkey
-    00091c080f5e12
-    node cli.js -d 00091c080f5e12
+    $ grunt
+    Running "exec:encrypt" (exec) task
+    050609012a4957
+    
+    Running "exec:decrypt" (exec) task
     monkey
+    
+    Done, without errors.
 
 # HOMEPAGE
 
