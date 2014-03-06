@@ -1,5 +1,9 @@
 # ios7crypt - Encrypt and decrypt Cisco IOS7 passwords
 
+# INSTALL
+
+    $ npm install -g ios7crypt
+
 # EXAMPLE
 
     $ npm install
@@ -26,14 +30,13 @@ http://ios7.yellosoft.us/
 * [Bundler](http://bundler.io/)
 * [Cucumber](http://cukes.info/)
 * [Guard](http://guardgem.org/)
+* [aspelllint](https://github.com/mcandre/aspelllint)
 
-# INSTALL
+# DEVELOPMENT
 
-    $ npm install ios7crypt
+## Test
 
-# TESTING
-
-## Logic
+### Logic
 
 Ensure the ios7crypt logic works as expected:
 
@@ -47,7 +50,7 @@ Ensure the ios7crypt logic works as expected:
 
       1 passing (36ms)
 
-## CLI
+### CLI
 
 Ensure the CLI works as expected:
 
@@ -63,13 +66,18 @@ Ensure the CLI works as expected:
     2 steps (2 passed)
     0m0.142s
 
-# LINT
+## Lint
 
 Keep the code tidy:
 
     $ npm run-script lint
 
-# GUARD
+## Spell Check
+
+    $ aspelllint
+    ...
+
+## Local CI
 
 Guard can automatically check for compliance on file change:
 
