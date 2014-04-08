@@ -4,7 +4,8 @@ sprintf = require("sprintf").sprintf,
 path = require("path"),
 yamlish = require("yamlish"),
 data2xml = require("data2xml"),
-ini = require("ini");
+ini = require("ini"),
+qc = require("quickcheck");
 
 var xlatPrime = [
   0x64, 0x73, 0x66, 0x64, 0x3b, 0x6b, 0x66, 0x6f,
@@ -97,20 +98,3 @@ function decrypt(hash) {
 }
 
 exports.decrypt = decrypt;
-
-function propReversible(password) {
-  if (password.length > 1) {
-    return decrypt(encrypt(password)) === password;
-  }
-  else {
-    return true;
-  }
-}
-
-exports.propReversible = propReversible;
-
-function test() {
-  return qc.forAll(propReversible, qc.arbString);
-}
-
-exports.test = test;

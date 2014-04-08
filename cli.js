@@ -6,28 +6,10 @@ qc = require("quickcheck"),
 pkginfo = require("pkginfo")(module, "version"),
 ios7crypt = require("./ios7crypt");
 
-function propReversible(password) {
-  if (password.length > 1) {
-    return ios7crypt.decrypt(ios7crypt.encrypt(password)) === password;
-  }
-  else {
-    return true;
-  }
-}
-
-exports.propReversible = propReversible;
-
-function test() {
-  return qc.forAll(propReversible, qc.arbString);
-}
-
-exports.test = test;
-
 function usage() {
   console.log("cli.js [options]");
   console.log("-e <password>\tEncrypt");
   console.log("-d <hash>\tDecrypt");
-  console.log("-t\t\tTest");
   console.log("-h\t\tUsage");
   console.log("-v\t\tVersion info");
 }
@@ -60,7 +42,7 @@ function main() {
     }
   }
   else if ("t" in argv) {
-    test();
+    ios7crypt.test();
   }
   else if ("v" in argv) {
     console.log(module.exports.version);

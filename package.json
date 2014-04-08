@@ -18,19 +18,24 @@
     "node": "*"
   },
   "scripts": {
+    "test": "mocha",
     "lint": "jshint ."
   },
   "dependencies": {
     "optimist": "~0.1.7",
     "zipwith": "~0.0.1",
     "sprintf": "~0.1.1",
-    "quickcheck": "~0.0.0",
+    "quickcheck": "0.0.4",
     "yamlish": "~0.0.2",
     "data2xml": "~0.4.0",
     "ini": "~1.0.2",
-    "pkginfo": "~0.3.0"
+    "pkginfo": "~0.3.0",
+    "mocha": "~1.17"
   },
   "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-cli": "~0.1.13",
+    "grunt-exec": "~0.4.5",
     "jshint": ">=2.1.2"
   }
 }
