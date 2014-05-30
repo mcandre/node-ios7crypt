@@ -11,7 +11,8 @@ var templates = {
   html: "ios7crypt.html.mustache",
   json: "ios7crypt.json.mustache",
   yaml: "ios7crypt.yml.mustache",
-  xml: "ios7crypt.xml.mustache"
+  xml: "ios7crypt.xml.mustache",
+  ini: "ios7crypt.ini.mustache"
 };
 
 for (var format in templates) {
@@ -42,8 +43,8 @@ function formatXML(view) {
 
 exports.formatXML = formatXML;
 
-function formatINI(password, hash) {
-  return ini.encode({ password: password, hash: hash });
+function formatINI(view) {
+  return mustache.render(templates["ini"], view);
 }
 
 exports.formatINI = formatINI;
@@ -111,7 +112,7 @@ function server() {
       output = formatXML(view);
     }
     else if (format === "ini") {
-      output = formatINI(password, hash);
+      output = formatINI(view);
     }
     else if (format === "txt") {
       output = formatTXT(password, hash);
