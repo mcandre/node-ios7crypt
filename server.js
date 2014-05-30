@@ -3,75 +3,41 @@
 var
 http = require("http"),
 url = require("url"),
+path = require("path"),
 fs = require("fs"),
 mustache = require("mustache"),
 ios7crypt = require("./ios7crypt");
 
 var templates = {
-  html: "ios7crypt.html.mustache",
-  json: "ios7crypt.json.mustache",
-  yaml: "ios7crypt.yml.mustache",
-  xml: "ios7crypt.xml.mustache",
-  ini: "ios7crypt.ini.mustache",
-  txt: "ios7crypt.txt.mustache"
+  ".html": "ios7crypt.html.mustache",
+  ".json": "ios7crypt.json.mustache",
+  ".yml": "ios7crypt.yml.mustache",
+  ".xml": "ios7crypt.xml.mustache",
+  ".ini": "ios7crypt.ini.mustache",
+  ".txt": "ios7crypt.txt.mustache"
 };
 
 for (var format in templates) {
   templates[format] = fs.readFileSync("views/" + templates[format]).toString();
 }
 
-function formatHTML(view) {
-  return mustache.render(templates["html"], view);
-}
-
-exports.formatHTML = formatHTML;
-
-function formatJSON(view) {
-  return mustache.render(templates["json"], view);
-}
-
-exports.formatJSON = formatJSON;
-
-function formatYAML(view) {
-  return mustache.render(templates["yaml"], view);
-}
-
-exports.formatYAML = formatYAML;
-
-function formatXML(view) {
-  return mustache.render(templates["xml"], view);
-}
-
-exports.formatXML = formatXML;
-
-function formatINI(view) {
-  return mustache.render(templates["ini"], view);
-}
-
-exports.formatINI = formatINI;
-
-function formatTXT(view) {
-  return mustache.render(templates["txt"], view);
-}
-
-exports.formatTXT = formatTXT;
-
 var port = 8125;
 
 var format2mimetype = {
-  html: "text/html",
-  json: "text/json",
-  txt: "text/plain",
-  yaml: "text/yaml",
-  xml: "application/xml",
-  ini: "application/octet-stream"
+  ".html": "text/html",
+  ".json": "text/json",
+  ".txt": "text/plain",
+  ".yaml": "text/yaml",
+  ".xml": "application/xml",
+  ".ini": "application/octet-stream"
 };
 
 function server() {
   http.createServer(function (req, res) {
     var
-    query = url.parse(req.url, true).query,
-    format = query.format || "html",
+    u = url.parse(req.url, true),
+    query = u.query,
+    format = path.extname(u.pathname) || ".html",
     password = query.password,
     hash = query.hash,
     myurl = "",
@@ -98,27 +64,8 @@ function server() {
       hash: hash
     };
 
-    var output = "";
-    if (format === "html") {
-      output = formatHTML(view);
-    }
-    else if (format === "json") {
-      output = formatJSON(view);
-    }
-    else if (format === "yaml") {
-      output = formatYAML(view);
-    }
-    else if (format === "xml") {
-      output = formatXML(view);
-    }
-    else if (format === "ini") {
-      output = formatINI(view);
-    }
-    else if (format === "txt") {
-      output = formatTXT(view);
-    }
-
-    res.end(output);
+    var content = mustache.render(templates[format], view);
+    res.end(content);
   }).listen(port);
 
   console.log("Server running at http://localhost:" + port + "/");
