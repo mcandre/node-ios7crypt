@@ -7,18 +7,23 @@ fs = require("fs"),
 mustache = require("mustache"),
 ios7crypt = require("./ios7crypt");
 
-var indexTemplate = fs.readFileSync("index.mst").toString();
+var templates = {
+  html: "ios7crypt.html.mustache",
+  json: "ios7crypt.json.mustache"
+};
+
+for (var format in templates) {
+  templates[format] = fs.readFileSync("views/" + templates[format]).toString();
+}
 
 function formatHTML(view) {
-  var html = mustache.render(indexTemplate, view);
-
-  return html;
+  return mustache.render(templates["html"], view);
 }
 
 exports.formatHTML = formatHTML;
 
-function formatJSON(password, hash) {
-  return JSON.stringify({ password: password, hash: hash });
+function formatJSON(view) {
+  return mustache.render(templates["json"], view);
 }
 
 exports.formatJSON = formatJSON;
@@ -95,7 +100,7 @@ function server() {
       output = formatHTML(view);
     }
     else if (format === "json") {
-      output = formatJSON(password, hash);
+      output = formatJSON(view);
     }
     else if (format === "yaml") {
       output = formatYAML(password, hash);
