@@ -10,7 +10,7 @@
   #crypto_form { display: block; margin: 5% auto; width: 300px; }
   label { display: block; float: left; width: 5%; padding-right: 1%; }
   #formats { position: fixed; bottom: 2em; left: 1em; }
-  github { position: fixed; bottom: 2em; right: 1em; }
+  #github { position: fixed; bottom: 2em; right: 1em; }
     </style>
 </head>
 <body onload="document.getElementById('password').focus();">

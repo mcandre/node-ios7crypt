@@ -7,14 +7,10 @@ fs = require("fs"),
 mustache = require("mustache"),
 ios7crypt = require("./ios7crypt");
 
-var indexTemplate = fs.readFileSync("index.mst");
+var indexTemplate = fs.readFileSync("index.mst").toString();
 
-function formatHTML(url, password, hash) {
-  var html = mustache.render(indexTemplate, {
-    url: url,
-    password: password,
-    hash: hash
-  });
+function formatHTML(view) {
+  var html = mustache.render(indexTemplate, view);
 
   return html;
 }
@@ -88,9 +84,15 @@ function server() {
 
     res.writeHead(200, {"Content-Type": format2mimetype[format]});
 
+    var view = {
+      url: myurl,
+      password: password,
+      hash: hash
+    };
+
     var output = "";
     if (format === "html") {
-      output = formatHTML(myurl, password, hash);
+      output = formatHTML(view);
     }
     else if (format === "json") {
       output = formatJSON(password, hash);
