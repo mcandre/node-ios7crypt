@@ -32,15 +32,13 @@
     </form>
   </div>
 
-  {{#url}}
-    <div id="formats">Other formats:
-      <a href="/ios7crypt.json{{url}}&format=json">JSON</a>
-      <a href="/ios7crypt.yaml{{url}}&format=yaml">YAML</a>
-      <a href="/ios7crypt.xml{{url}}&format=xml">XML</a>
-      <a href="/ios7crypt.ini{{url}}&format=ini">INI</a>
-      <a href="/ios7crypt.txt{{url}}&format=txt">TXT</a>
+  {{#query}}
+    <div id="formats">Alternate formats:
+      {{#alternateFormats}}
+        <a href="/ios7crypt{{extension}}?{{query}}">{{name}}</a>
+      {{/alternateFormats}}
     </div>
-  {{/url}}
+  {{/query}}
 
   <div id="github">
     <a href="https://github.com/mcandre/node-ios7crypt">GitHub</a>

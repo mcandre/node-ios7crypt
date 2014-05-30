@@ -4,9 +4,18 @@ var
 http = require("http"),
 url = require("url"),
 path = require("path"),
+querystring = require("querystring"),
 fs = require("fs"),
 mustache = require("mustache"),
 ios7crypt = require("./ios7crypt");
+
+var alternateFormats = [
+  { extension: ".json", name: "JSON" },
+  { extension: ".yml", name: "YAML" },
+  { extension: ".xml", name: "XML" },
+  { extension: ".ini", name: "INI" },
+  { extension: ".txt", name: "TXT" }
+];
 
 var templates = {
   ".html": "ios7crypt.html.mustache",
@@ -44,11 +53,9 @@ function server() {
     mimetype = "";
 
     if (password !== undefined) {
-      myurl += "?password=" + password;
       hash = ios7crypt.encrypt(password);
     }
     else if (hash !== undefined) {
-      myurl += "?hash=" + hash;
       password = ios7crypt.decrypt(hash);
     }
     else {
@@ -59,7 +66,8 @@ function server() {
     res.writeHead(200, {"Content-Type": format2mimetype[format]});
 
     var view = {
-      url: myurl,
+      query: querystring.stringify(query),
+      alternateFormats: alternateFormats,
       password: password,
       hash: hash
     };
