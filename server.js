@@ -10,7 +10,8 @@ ios7crypt = require("./ios7crypt");
 var templates = {
   html: "ios7crypt.html.mustache",
   json: "ios7crypt.json.mustache",
-  yaml: "ios7crypt.yml.mustache"
+  yaml: "ios7crypt.yml.mustache",
+  xml: "ios7crypt.xml.mustache"
 };
 
 for (var format in templates) {
@@ -35,8 +36,8 @@ function formatYAML(view) {
 
 exports.formatYAML = formatYAML;
 
-function formatXML(password, hash) {
-  return data2xml("ios7crypt", { password: password, hash: hash });
+function formatXML(view) {
+  return mustache.render(templates["xml"], view);
 }
 
 exports.formatXML = formatXML;
@@ -107,7 +108,7 @@ function server() {
       output = formatYAML(view);
     }
     else if (format === "xml") {
-      output = formatXML(password, hash);
+      output = formatXML(view);
     }
     else if (format === "ini") {
       output = formatINI(password, hash);
