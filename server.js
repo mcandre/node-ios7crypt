@@ -3,53 +3,20 @@
 var
 http = require("http"),
 url = require("url"),
+fs = require("fs"),
+mustache = require("mustache"),
 ios7crypt = require("./ios7crypt");
 
+var indexTemplate = fs.readFileSync("index.mst");
+
+console.log("Index template: " + indexTemplate);
+
 function formatHTML(url, password, hash) {
-  var html = "<!DOCTYPE html>" +
-    "<head>" +
-    "<title>IOS7Crypt</title><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" />" +
-    "</head>" +
-    "<body onload=\"document.getElementById('password').focus();\">" +
-    "<style type=\"text/css\" />" +
-    "body { text-align: center; }" +
-    "a { color: #000; }" +
-    "a:visited { color: #000; }" +
-    "#logo { font-size: 500%; }" +
-    "#crypto_form { display: block; margin: 5% auto; width: 300px; }" +
-    "label { display: block; float: left; width: 5%; padding-right: 1%; }" +
-    "#formats { position: fixed; bottom: 2em; left: 1em; }" +
-    "#github { position: fixed; bottom: 2em; right: 1em; }" +
-    "</style>" +
-    "<h1 id=\"logo\"><a href=\"/\">IOS7Crypt</a></h1>" +
-    "<div id=\"crypto_form\">" +
-
-  "<form action=\"\" method=\"get\">" +
-    "<p><label for=\"password\">Password</label> <input id=\"password\" type=\"text\" name=\"password\" value=\"" + password + "\" /></p>" +
-    "</form>" +
-
-  "<form action=\"\" method=\"get\">" +
-    "<p><label for=\"hash\">Hash</label> <input id=\"hash\" type=\"text\" name=\"hash\" value=\"" + hash + "\" /></p>" +
-    "</form>" +
-
-  "</div>";
-
-  if (url !== "") {
-    html += "<div id=\"formats\">Other formats: " +
-      "<a href=\"" + ("/ios7crypt.json" + url) + "&format=json\">JSON</a>" +
-      " " +
-      "<a href=\"" + ("/ios7crypt.yaml" + url) + "&format=yaml\">YAML</a>" +
-      " " +
-      "<a href=\"" + ("/ios7crypt.xml" + url) + "&format=xml\">XML</a>" +
-      " " +
-      "<a href=\"" + ("/ios7crypt.ini" + url) + "&format=ini\">INI</a>" +
-      " " +
-      "<a href=\"" + ("/ios7crypt.txt" + url) + "&format=txt\">TXT</a>" +
-      "</div>";
-  }
-
-  html += "<div id=\"github\"><a href=\"https://github.com/mcandre/node-ios7crypt\">GitHub</a></div>" +
-    "</body></html>";
+  var html = mustache.render(indexTemplate, {
+    url: url,
+    password: password,
+    hash: hash
+  });
 
   return html;
 }
