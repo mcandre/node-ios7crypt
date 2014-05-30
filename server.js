@@ -9,8 +9,6 @@ ios7crypt = require("./ios7crypt");
 
 var indexTemplate = fs.readFileSync("index.mst");
 
-console.log("Index template: " + indexTemplate);
-
 function formatHTML(url, password, hash) {
   var html = mustache.render(indexTemplate, {
     url: url,
