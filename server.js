@@ -3,117 +3,59 @@
 var
 http = require("http"),
 url = require("url"),
+path = require("path"),
+querystring = require("querystring"),
+fs = require("fs"),
+mustache = require("mustache"),
 ios7crypt = require("./ios7crypt");
 
-function formatHTML(url, password, hash) {
-  var html = "<!DOCTYPE html>" +
-    "<head>" +
-    "<title>IOS7Crypt</title><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" />" +
-    "</head>" +
-    "<body onload=\"document.getElementById('password').focus();\">" +
-    "<style type=\"text/css\" />" +
-    "body { text-align: center; }" +
-    "a { color: #000; }" +
-    "a:visited { color: #000; }" +
-    "#logo { font-size: 500%; }" +
-    "#crypto_form { display: block; margin: 5% auto; width: 300px; }" +
-    "label { display: block; float: left; width: 5%; padding-right: 1%; }" +
-    "#formats { position: fixed; bottom: 2em; left: 1em; }" +
-    "#github { position: fixed; bottom: 2em; right: 1em; }" +
-    "</style>" +
-    "<h1 id=\"logo\"><a href=\"/\">IOS7Crypt</a></h1>" +
-    "<div id=\"crypto_form\">" +
+var alternateFormats = [
+  { extension: ".json", name: "JSON" },
+  { extension: ".yml", name: "YAML" },
+  { extension: ".xml", name: "XML" },
+  { extension: ".ini", name: "INI" },
+  { extension: ".txt", name: "TXT" }
+];
 
-  "<form action=\"\" method=\"get\">" +
-    "<p><label for=\"password\">Password</label> <input id=\"password\" type=\"text\" name=\"password\" value=\"" + password + "\" /></p>" +
-    "</form>" +
+var templates = {
+  ".html": "ios7crypt.html.mustache",
+  ".json": "ios7crypt.json.mustache",
+  ".yml": "ios7crypt.yml.mustache",
+  ".xml": "ios7crypt.xml.mustache",
+  ".ini": "ios7crypt.ini.mustache",
+  ".txt": "ios7crypt.txt.mustache"
+};
 
-  "<form action=\"\" method=\"get\">" +
-    "<p><label for=\"hash\">Hash</label> <input id=\"hash\" type=\"text\" name=\"hash\" value=\"" + hash + "\" /></p>" +
-    "</form>" +
-
-  "</div>";
-
-  if (url !== "") {
-    html += "<div id=\"formats\">Other formats: " +
-      "<a href=\"" + ("/ios7crypt.json" + url) + "&format=json\">JSON</a>" +
-      " " +
-      "<a href=\"" + ("/ios7crypt.yaml" + url) + "&format=yaml\">YAML</a>" +
-      " " +
-      "<a href=\"" + ("/ios7crypt.xml" + url) + "&format=xml\">XML</a>" +
-      " " +
-      "<a href=\"" + ("/ios7crypt.ini" + url) + "&format=ini\">INI</a>" +
-      " " +
-      "<a href=\"" + ("/ios7crypt.txt" + url) + "&format=txt\">TXT</a>" +
-      "</div>";
-  }
-
-  html += "<div id=\"github\"><a href=\"https://github.com/mcandre/node-ios7crypt\">GitHub</a></div>" +
-    "</body></html>";
-
-  return html;
+for (var format in templates) {
+  templates[format] = fs.readFileSync("views/" + templates[format]).toString();
 }
-
-exports.formatHTML = formatHTML;
-
-function formatJSON(password, hash) {
-  return JSON.stringify({ password: password, hash: hash });
-}
-
-exports.formatJSON = formatJSON;
-
-function formatYAML(password, hash) {
-  return yamlish.encode({ password: password, hash: hash });
-}
-
-exports.formatYAML = formatYAML;
-
-function formatXML(password, hash) {
-  return data2xml("ios7crypt", { password: password, hash: hash });
-}
-
-exports.formatXML = formatXML;
-
-function formatINI(password, hash) {
-  return ini.encode({ password: password, hash: hash });
-}
-
-exports.formatINI = formatINI;
-
-function formatTXT(password, hash) {
-  return "Password:\t" + password + "\n" +
-    "Hash:\t\t" + hash;
-}
-
-exports.formatTXT = formatTXT;
 
 var port = 8125;
 
 var format2mimetype = {
-  html: "text/html",
-  json: "text/json",
-  txt: "text/plain",
-  yaml: "text/yaml",
-  xml: "application/xml",
-  ini: "application/octet-stream"
+  ".html": "text/html",
+  ".json": "text/json",
+  ".txt": "text/plain",
+  ".yaml": "text/yaml",
+  ".xml": "application/xml",
+  ".ini": "application/octet-stream"
 };
 
 function server() {
   http.createServer(function (req, res) {
     var
-    query = url.parse(req.url, true).query,
-    format = query.format || "html",
+    u = url.parse(req.url, true),
+    query = u.query,
+    format = path.extname(u.pathname) || ".html",
     password = query.password,
     hash = query.hash,
     myurl = "",
     mimetype = "";
 
     if (password !== undefined) {
-      myurl += "?password=" + password;
       hash = ios7crypt.encrypt(password);
     }
     else if (hash !== undefined) {
-      myurl += "?hash=" + hash;
       password = ios7crypt.decrypt(hash);
     }
     else {
@@ -123,27 +65,15 @@ function server() {
 
     res.writeHead(200, {"Content-Type": format2mimetype[format]});
 
-    var output = "";
-    if (format === "html") {
-      output = formatHTML(myurl, password, hash);
-    }
-    else if (format === "json") {
-      output = formatJSON(password, hash);
-    }
-    else if (format === "yaml") {
-      output = formatYAML(password, hash);
-    }
-    else if (format === "xml") {
-      output = formatXML(password, hash);
-    }
-    else if (format === "ini") {
-      output = formatINI(password, hash);
-    }
-    else if (format === "txt") {
-      output = formatTXT(password, hash);
-    }
+    var view = {
+      query: querystring.stringify(query),
+      alternateFormats: alternateFormats,
+      password: password,
+      hash: hash
+    };
 
-    res.end(output);
+    var content = mustache.render(templates[format], view);
+    res.end(content);
   }).listen(port);
 
   console.log("Server running at http://localhost:" + port + "/");
