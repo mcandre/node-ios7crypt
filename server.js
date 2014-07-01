@@ -27,7 +27,7 @@ var templates = {
 };
 
 for (var format in templates) {
-  templates[format] = fs.readFileSync("views/" + templates[format]).toString();
+  templates[format] = fs.readFileSync(__dirname + "/views/" + templates[format]).toString();
 }
 
 var port = 8125;
