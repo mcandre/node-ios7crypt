@@ -2,9 +2,6 @@ var
 zipwith = require("zipwith").zipwith,
 sprintf = require("sprintf").sprintf,
 path = require("path"),
-yamlish = require("yamlish"),
-data2xml = require("data2xml"),
-ini = require("ini"),
 qc = require("quickcheck");
 
 var xlatPrime = [
