@@ -85,3 +85,7 @@ Guard can automatically check for compliance on file change:
     $ guard -G Guardfile-test
     $ guard -G Guardfile-cucumber
     $ guard -G Guardfile-lint
+
+## Hooks
+
+See `hooks/`.
