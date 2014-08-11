@@ -28,7 +28,7 @@
     "sprintf": "~0.1.1",
     "quickcheck": "0.0.4",
     "pkginfo": "~0.3.0",
-    "mocha": "~1.17"
+    "mocha": "1.21.4"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
