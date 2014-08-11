@@ -6,15 +6,10 @@
 
 # EXAMPLE
 
-    $ npm install
-    $ grunt
-    Running "exec:encrypt" (exec) task
+    $ ios7crypt -e monkey
     050609012a4957
-    
-    Running "exec:decrypt" (exec) task
+    $ ios7crypt -d 050609012a4957
     monkey
-    
-    Done, without errors.
 
 # HOMEPAGE
 
@@ -54,8 +49,7 @@ Ensure the ios7crypt logic works as expected:
 
 Ensure the CLI works as expected:
 
-    $ bundle
-    $ cucumber
+    $ grunt cucumber
     Feature: Run example tests
 
       Scenario: Running example tests            # features/run_example_tests.feature:3
@@ -70,7 +64,7 @@ Ensure the CLI works as expected:
 
 Keep the code tidy:
 
-    $ npm run-script lint
+    $ grunt lint
 
 ## Spell Check
 
