@@ -3,7 +3,8 @@ module.exports = function(grunt) {
 		exec: {
 			encrypt: "node cli.js -e monkey",
 			decrypt: "node cli.js -d 00091c080f5e12",
-      test: "npm test"
+      test: "npm test",
+      jshint: "jshint ."
 		}
   });
 
@@ -11,4 +12,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask("default", ["exec:encrypt", "exec:decrypt"]);
   grunt.registerTask("test", ["exec:test"]);
+  grunt.registerTask("lint", ["exec:jshint"]);
 };
