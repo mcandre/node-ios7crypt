@@ -12,7 +12,7 @@
     "lib": "."
   },
   "scripts": {
-    "test": "test()"
+    "test": "mocha ."
   },
   "engines": {
     "node": "*"
