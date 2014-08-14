@@ -5,8 +5,8 @@ end
 Then(/^the output is correct for each test$/) do
   lines = @cucumber.split("\n")
 
-  lines.length.should == 2
+  expect(lines.length).to eq(2)
 
-  lines[0].should =~ /^[0-9]{2}[0-9a-f]+$/
-  lines[1].should == 'monkey'
+  expect(lines[0]).to match(/^[0-9]{2}[0-9a-f]+$/)
+  expect(lines[1]).to eq('monkey')
 end
