@@ -3,7 +3,8 @@ module.exports = function(grunt) {
 		exec: {
 			cucumber: "bundle exec cucumber",
       test: "npm test",
-      jshint: "jshint ."
+      jshint: "jshint .",
+      lili: "bundle exec lili ."
 		}
   });
 
@@ -12,5 +13,12 @@ module.exports = function(grunt) {
   grunt.registerTask("default", ["exec:test"]);
   grunt.registerTask("cucumber", ["exec:cucumber"]);
   grunt.registerTask("test", ["exec:test"]);
-  grunt.registerTask("lint", ["exec:jshint"]);
+
+  grunt.registerTask("lint", [
+    "exec:jshint",
+    "exec:lili"
+  ]);
+
+  grunt.registerTask("jshint", ["exec:jshint"]);
+  grunt.registerTask("lili", ["exec:lili"]);
 };
