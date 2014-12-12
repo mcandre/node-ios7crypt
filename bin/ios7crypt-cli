@@ -4,7 +4,7 @@ var
 argv = require("optimist").string("e", "d", "t", "h", "v").argv,
 qc = require("quickcheck"),
 pkginfo = require("pkginfo")(module, "version"),
-ios7crypt = require("./ios7crypt");
+ios7crypt = require("../lib/ios7crypt");
 
 function usage() {
   console.log("cli.js [options]");

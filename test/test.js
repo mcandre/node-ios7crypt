@@ -1,7 +1,7 @@
 var
-ios7crypt = require("../ios7crypt"),
 qc = require("quickcheck"),
-assert = require("assert");
+assert = require("assert"),
+ios7crypt = require("../lib/ios7crypt");
 
 describe("ios7crypt", function() {
   describe("reversible", function() {

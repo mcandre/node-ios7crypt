@@ -7,12 +7,13 @@
     "url": "git://github.com/mcandre/node-ios7crypt.git"
   },
   "author": "Andrew Pennebaker <andrew.pennebaker@gmail.com> (http://www.yellosoft.us/)",
-  "main": "ios7crypt",
-  "directories": {
-    "lib": "."
-  },
   "engines": {
     "node": ">=0.8"
+  },
+  "main": "lib/ios7crypt.js",
+  "bin": {
+    "ios7crypt-cli": "bin/ios7crypt-cli",
+    "ios7crypt-server": "bin/ios7crypt-server"
   },
   "scripts": {
     "test": "mocha",

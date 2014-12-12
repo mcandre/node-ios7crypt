@@ -7,7 +7,7 @@ path = require("path"),
 querystring = require("querystring"),
 fs = require("fs"),
 mustache = require("mustache"),
-ios7crypt = require("./ios7crypt");
+ios7crypt = require("../lib/ios7crypt");
 
 var alternateFormats = [
   { extension: ".json", name: "JSON" },
