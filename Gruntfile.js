@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
-		exec: {
-			cucumber: "bundle exec cucumber",
+    exec: {
+      cucumber: "bundle exec cucumber",
       test: "npm test",
       jshint: "jshint .",
       lili: "bundle exec lili ."
