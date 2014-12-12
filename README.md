@@ -2,14 +2,18 @@
 
 # INSTALL
 
-    $ npm install -g ios7crypt
+```
+$ npm install -g ios7crypt
+```
 
 # EXAMPLE
 
-    $ ios7crypt -e monkey
-    050609012a4957
-    $ ios7crypt -d 050609012a4957
-    monkey
+```
+$ ios7crypt -e monkey
+050609012a4957
+$ ios7crypt -d 050609012a4957
+monkey
+```
 
 # HOMEPAGE
 
@@ -17,7 +21,7 @@ http://ios7.yellosoft.us/
 
 # REQUIREMENTS
 
-* [Node.js](http://nodejs.org/) 0.10+
+* [Node.js](http://nodejs.org/) 0.8+
 
 ## Optional
 

@@ -11,11 +11,8 @@
   "directories": {
     "lib": "."
   },
-  "scripts": {
-    "test": "mocha"
-  },
   "engines": {
-    "node": "*"
+    "node": ">=0.8"
   },
   "scripts": {
     "test": "mocha",
