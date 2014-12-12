@@ -9,9 +9,9 @@ $ npm install -g ios7crypt
 # EXAMPLE
 
 ```
-$ ios7crypt -e monkey
+$ ios7crypt-cli -e monkey
 050609012a4957
-$ ios7crypt -d 050609012a4957
+$ ios7crypt-cli -d 050609012a4957
 monkey
 ```
 
@@ -39,50 +39,60 @@ http://ios7.yellosoft.us/
 
 Ensure the ios7crypt logic works as expected:
 
-    $ npm test
+```
+$ npm test
 
-    > ios7crypt@0.0.10 test /Users/andrew/Desktop/src/node-ios7crypt
-    > mocha
+> ios7crypt@0.0.10 test /Users/andrew/Desktop/src/node-ios7crypt
+> mocha
 
 
-      ․
+  ․
 
-      1 passing (36ms)
+  1 passing (36ms)
+```
 
 ### CLI
 
 Ensure the CLI works as expected:
 
-    $ grunt cucumber
-    Feature: Run example tests
+```
+$ grunt cucumber
+Feature: Run example tests
 
-      Scenario: Running example tests            # features/run_example_tests.feature:3
-        Given the program has finished           # features/step_definitions/steps.rb:1
-        Then the output is correct for each test # features/step_definitions/steps.rb:5
+  Scenario: Running example tests            # features/run_example_tests.feature:3
+    Given the program has finished           # features/step_definitions/steps.rb:1
+    Then the output is correct for each test # features/step_definitions/steps.rb:5
 
-    1 scenario (1 passed)
-    2 steps (2 passed)
-    0m0.142s
+1 scenario (1 passed)
+2 steps (2 passed)
+0m0.142s
+```
 
 ## Lint
 
 Keep the code tidy:
 
-    $ grunt lint
+```
+$ grunt lint
+```
 
 ## Spell Check
 
-    $ aspelllint
-    ...
+```
+$ aspelllint
+...
+```
 
 ## Local CI
 
 Guard can automatically check for compliance on file change:
 
-    $ bundle
-    $ guard -G Guardfile-test
-    $ guard -G Guardfile-cucumber
-    $ guard -G Guardfile-lint
+```
+$ bundle
+$ guard -G Guardfile-test
+$ guard -G Guardfile-cucumber
+$ guard -G Guardfile-lint
+```
 
 ## Hooks
 
