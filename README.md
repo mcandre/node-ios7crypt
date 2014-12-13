@@ -1,11 +1,5 @@
 # ios7crypt - Encrypt and decrypt Cisco IOS7 passwords
 
-# INSTALL
-
-```
-$ npm install -g ios7crypt
-```
-
 # EXAMPLE
 
 ```
@@ -18,6 +12,16 @@ monkey
 # HOMEPAGE
 
 http://ios7.yellosoft.us/
+
+# NPM
+
+https://www.npmjs.com/package/ios7crypt
+
+# INSTALL
+
+```
+$ npm install [-g] ios7crypt
+```
 
 # REQUIREMENTS
 
