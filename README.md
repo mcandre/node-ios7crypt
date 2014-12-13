@@ -1,5 +1,9 @@
 # ios7crypt - Encrypt and decrypt Cisco IOS7 passwords
 
+# HOMEPAGE
+
+http://ios7.yellosoft.us/
+
 # EXAMPLE
 
 ```
@@ -8,10 +12,6 @@ $ ios7crypt-cli -e monkey
 $ ios7crypt-cli -d 050609012a4957
 monkey
 ```
-
-# HOMEPAGE
-
-http://ios7.yellosoft.us/
 
 # NPM
 
