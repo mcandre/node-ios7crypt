@@ -1,9 +1,10 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     exec: {
-      cucumber: "bundle exec cucumber",
       test: "npm test",
-      jshint: "jshint .",
+      cucumber: "bundle exec cucumber",
+
+      jshint: "node_modules/jshint/bin/jshint .",
       lili: "bundle exec lili ."
 		}
   });
