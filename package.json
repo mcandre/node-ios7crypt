@@ -16,8 +16,7 @@
     "ios7crypt-server": "bin/ios7crypt-server"
   },
   "scripts": {
-    "test": "mocha",
-    "lint": "jshint ."
+    "test": "mocha"
   },
   "dependencies": {
     "mustache": "~0.8.1",
