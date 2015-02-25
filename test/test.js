@@ -1,3 +1,5 @@
+"use strict";
+
 var
 qc = require("quickcheck"),
 assert = require("assert"),
