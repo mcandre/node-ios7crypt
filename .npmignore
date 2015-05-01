@@ -1,0 +1,10 @@
+Gemfile
+Gruntfile.js
+Guardfile*
+features
+views
+hooks
+node_modules
+test
+upstart.conf
+.*
