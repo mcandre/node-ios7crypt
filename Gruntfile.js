@@ -6,7 +6,7 @@ module.exports = function(grunt) {
       test: 'npm test',
       cucumber: 'bundle exec cucumber',
 
-      jshint: 'node_modules/.bin/jshint .',
+      jshint: 'node node_modules/jshint/bin/jshint .',
       jslint: 'find . -type d -name node_modules -prune -o -type d -name bower_components -prune -o -type f -name "*[-.]min.js" -prune -o -type f -name "*.bat" -prune -o -type f \\( -wholename "*/bin/*" -or -name "*.js" \\) -exec node_modules/.bin/jslint {} \\;',
       eslint: 'node_modules/.bin/eslint .',
       lili: 'bundle exec lili .',
