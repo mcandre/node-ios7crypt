@@ -25,7 +25,7 @@ $ npm install [-g] ios7crypt
 
 # REQUIREMENTS
 
-* [Node.js](http://nodejs.org/) 0.11.6+
+* [Node.js](http://nodejs.org/) 0.12.17+
 
 ## Optional
 
