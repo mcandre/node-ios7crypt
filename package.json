@@ -8,7 +8,7 @@
   },
   "author": "Andrew Pennebaker <andrew.pennebaker@gmail.com> (http://www.yellosoft.us/)",
   "engines": {
-    "node": ">=0.12.17"
+    "node": ">=4.6.2"
   },
   "main": "lib/ios7crypt.js",
   "bin": {
