@@ -1,9 +1,0 @@
-guard :shell do
-  watch(%r{^.*\.(js|json)|test/.*\.js$}) do |m|
-    title = 'Test'
-    eager 'npm test'
-    status = ($?.success? && :success) || :failed
-    n '', title, status
-    ''
-  end
-end

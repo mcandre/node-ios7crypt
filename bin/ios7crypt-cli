@@ -9,49 +9,49 @@ pkginfo = require("pkginfo")(module, "version"),
 ios7crypt = require("../lib/ios7crypt");
 
 function usage() {
-  console.log("cli.js [options]");
-  console.log("-e <password>\tEncrypt");
-  console.log("-d <hash>\tDecrypt");
-  console.log("-h\t\tUsage");
-  console.log("-v\t\tVersion info");
+    console.log("cli.js [options]");
+    console.log("-e <password>\tEncrypt");
+    console.log("-d <hash>\tDecrypt");
+    console.log("-h\t\tUsage");
+    console.log("-v\t\tVersion info");
 }
 
 exports.usage = usage;
 
 function main() {
-  var
-  password,
-  hash;
+    var
+    password,
+    hash;
 
-  if ("e" in argv) {
-    password = argv.e;
+    if ("e" in argv) {
+        password = argv.e;
 
-    if (password === undefined || password === true) {
-      usage();
+        if (password === undefined || password === true) {
+            usage();
+        }
+        else {
+            console.log(ios7crypt.encrypt(password));
+        }
+    }
+    else if ("d" in argv) {
+        hash = argv.d;
+
+        if (hash === undefined || hash === true) {
+            usage();
+        }
+        else {
+            console.log(ios7crypt.decrypt(hash));
+        }
+    }
+    else if ("t" in argv) {
+        ios7crypt.test();
+    }
+    else if ("v" in argv) {
+        console.log(module.exports.version);
     }
     else {
-      console.log(ios7crypt.encrypt(password));
+        usage();
     }
-  }
-  else if ("d" in argv) {
-    hash = argv.d;
-
-    if (hash === undefined || hash === true) {
-      usage();
-    }
-    else {
-      console.log(ios7crypt.decrypt(hash));
-    }
-  }
-  else if ("t" in argv) {
-    ios7crypt.test();
-  }
-  else if ("v" in argv) {
-    console.log(module.exports.version);
-  }
-  else {
-    usage();
-  }
 }
 
 if (!module.parent) { main(); }

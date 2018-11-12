@@ -1,40 +1,40 @@
 {
-  "name": "ios7crypt",
-  "description": "Encrypt and decrypt Cisco IOS7 passwords",
-  "version": "0.0.10",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/mcandre/node-ios7crypt.git"
-  },
-  "author": "Andrew Pennebaker <andrew.pennebaker@gmail.com> (http://www.yellosoft.us/)",
-  "engines": {
-    "node": ">=6.9.1"
-  },
-  "main": "lib/ios7crypt.js",
-  "bin": {
-    "ios7crypt-cli": "bin/ios7crypt-cli",
-    "ios7crypt-server": "bin/ios7crypt-server"
-  },
-  "scripts": {
-    "test": "mocha"
-  },
-  "dependencies": {
-    "mustache": "~0.8.1",
-    "optimist": "~0.1.7",
-    "underscore": "~1.8.3",
-    "rho-contracts": "0.0.5",
-    "sprintf": "~0.1.3",
-    "quickcheck": "0.0.4",
-    "pkginfo": "~0.3.0",
-    "mocha": "1.21.4"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-cli": "~0.1.13",
-    "grunt-exec": "~0.4.5",
-    "jshint": ">=2.1.2",
-    "jslint": ">= 0.8.1",
-    "eslint": ">= 0.16.0",
-    "editorconfig-tools": ">= 0.0.1"
-  }
+    "name": "ios7crypt",
+    "description": "Encrypt and decrypt Cisco IOS7 passwords",
+    "version": "0.0.10",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mcandre/node-ios7crypt.git"
+    },
+    "author": "Andrew Pennebaker <andrew.pennebaker@gmail.com>",
+    "engines": {
+        "node": ">=6.9.1"
+    },
+    "main": "lib/ios7crypt.js",
+    "bin": {
+        "ios7crypt-cli": "bin/ios7crypt-cli",
+        "ios7crypt-server": "bin/ios7crypt-server"
+    },
+    "scripts": {
+        "test": "mocha"
+    },
+    "dependencies": {
+        "mustache": "~0.8.1",
+        "optimist": "~0.1.7",
+        "underscore": "~1.8.3",
+        "rho-contracts": "0.0.5",
+        "sprintf": "~0.1.3",
+        "quickcheck": "0.0.4",
+        "pkginfo": "~0.3.0",
+        "mocha": "1.21.4"
+    },
+    "devDependencies": {
+        "grunt": "~0.4.2",
+        "grunt-cli": "~0.1.13",
+        "grunt-exec": "~0.4.5",
+        "jshint": ">=2.1.2",
+        "jslint": ">= 0.8.1",
+        "eslint": ">= 0.16.0",
+        "eclint": "~2.8.1"
+    }
 }
