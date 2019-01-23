@@ -19,7 +19,7 @@
         "test": "mocha"
     },
     "dependencies": {
-        "mustache": "~0.8.1",
+        "mustache": "~2.2.1",
         "optimist": "~0.1.7",
         "underscore": "~1.8.3",
         "rho-contracts": "0.0.5",
