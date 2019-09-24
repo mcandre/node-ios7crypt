@@ -1,18 +1,16 @@
-"use strict";
+'use strict';
 
-var
-qc = require("quickcheck"),
-assert = require("assert"),
-ios7crypt = require("../lib/ios7crypt");
+var qc = require('quickcheck'),
+    assert = require('assert'),
+    ios7crypt = require('../lib/ios7crypt');
 
-describe("ios7crypt", function() {
-    describe("reversible", function() {
-        it("should be reversible", function() {
+describe('ios7crypt', function() {
+    describe('reversible', function() {
+        it('should be reversible', function() {
             function propReversible(password) {
                 if (password.length > 1) {
                     return ios7crypt.decrypt(ios7crypt.encrypt(password)) === password;
-                }
-                else {
+                } else {
                     return true;
                 }
             }
