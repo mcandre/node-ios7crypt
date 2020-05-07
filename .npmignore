@@ -2,7 +2,6 @@ Gemfile*
 Gruntfile.js
 Guardfile*
 features
-hooks
 node_modules
 test
 upstart.conf

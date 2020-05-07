@@ -99,7 +99,3 @@ $ guard -G Guardfile-test
 $ guard -G Guardfile-cucumber
 $ guard -G Guardfile-lint
 ```
-
-## Hooks
-
-See `hooks/`.
