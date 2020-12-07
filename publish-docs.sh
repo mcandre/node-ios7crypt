@@ -25,22 +25,15 @@ find \
     -exec rm -rf "{}" \;
 cd "$TRAVIS_BUILD_DIR"
 
-PACKAGEJSON_FILES="$(find . -path node_modules -prune -false -o -name package.json)"
+npm install -g grunt-cli jsdoc
+
+PACKAGEJSON_FILES="$(find . -path ./node_modules -prune -false -o -name package.json)"
 
 for PACKAGEJSON_FILE in $PACKAGEJSON_FILES; do
     PROJECT_BASE="$(dirname -- "$PACKAGEJSON_FILE")"
     PROJECT="$(readlink -f "$PROJECT_BASE")"
 
     cd "${PROJECT}"
-
-
-
-    echo "CWD: $(pwd)"
-
-
-
-    npm install
-    npm install -g grunt-cli jsdoc
     grunt doc
     mkdir -p "${PAGE_REPO}/${PROJECT_BASE}"
     cp -r html/. "${PAGE_REPO}/${PROJECT_BASE}/"
