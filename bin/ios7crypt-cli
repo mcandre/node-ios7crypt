@@ -5,8 +5,7 @@
 var argv = require('optimist')
         .string('e', 'd', 't', 'h', 'v')
         .argv,
-    qc = require('quickcheck'),
-    pkginfo = require('pkginfo')(module, 'version'),
+    _ = require('pkginfo')(module, 'version'),
     ios7crypt = require('../lib/ios7crypt');
 
 function usage() {

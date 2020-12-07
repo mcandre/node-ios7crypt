@@ -13,6 +13,10 @@ $ ios7crypt-cli -d 050609012a4957
 monkey
 ```
 
+# DOCUMENTATION
+
+https://mcandre.github.io/node-ios7crypt/
+
 # NPM
 
 https://www.npmjs.com/package/ios7crypt
@@ -45,7 +49,7 @@ $ npm install [-g] ios7crypt
 
 Ensure the ios7crypt logic works as expected:
 
-```
+```console
 $ npm test
 
 > ios7crypt@0.0.10 test /Users/andrew/Desktop/src/node-ios7crypt
@@ -61,7 +65,7 @@ $ npm test
 
 Ensure the CLI works as expected:
 
-```
+```console
 $ grunt cucumber
 Feature: Run example tests
 
@@ -78,24 +82,19 @@ Feature: Run example tests
 
 Keep the code tidy:
 
-```
+```console
 $ grunt lint
+```
+
+## Document
+
+```console
+$ grunt doc
 ```
 
 ## Spell Check
 
-```
+```console
 $ aspelllint
 ...
-```
-
-## Local CI
-
-Guard can automatically check for compliance on file change:
-
-```
-$ bundle
-$ guard -G Guardfile-test
-$ guard -G Guardfile-cucumber
-$ guard -G Guardfile-lint
 ```

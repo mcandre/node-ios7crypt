@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.7.0'
 
 group :development do
     gem 'cucumber', '~> 1.3'

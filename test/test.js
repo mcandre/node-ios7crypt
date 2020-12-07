@@ -1,7 +1,6 @@
 'use strict';
 
-var qc = require('quickcheck'),
-    assert = require('assert'),
+var fc = require('fast-check'),
     ios7crypt = require('../lib/ios7crypt');
 
 describe('ios7crypt', function() {
@@ -10,12 +9,12 @@ describe('ios7crypt', function() {
             function propReversible(password) {
                 if (password.length > 1) {
                     return ios7crypt.decrypt(ios7crypt.encrypt(password)) === password;
-                } else {
-                    return true;
                 }
+
+                return true;
             }
 
-            assert.equal(true, qc.forAll(propReversible, qc.arbString));
+            fc.assert(fc.property(fc.string(), propReversible));
         });
     });
 });
