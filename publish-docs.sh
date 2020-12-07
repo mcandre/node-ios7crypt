@@ -32,6 +32,13 @@ for PACKAGEJSON_FILE in $PACKAGEJSON_FILES; do
     PROJECT="$(readlink -f "$PROJECT_BASE")"
 
     cd "${PROJECT}"
+
+
+
+    echo "CWD: $(pwd)"
+
+
+
     npm install
     npm install -g grunt-cli jsdoc
     grunt doc
