@@ -33,7 +33,7 @@ for PACKAGEJSON_FILE in $PACKAGEJSON_FILES; do
 
     cd "${PROJECT}"
     npm install
-    npm install -g grunt jsdoc
+    npm install -g grunt-cli jsdoc
     grunt doc
     mkdir -p "${PAGE_REPO}/${PROJECT_BASE}"
     cp -r html/. "${PAGE_REPO}/${PROJECT_BASE}/"
