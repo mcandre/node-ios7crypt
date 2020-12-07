@@ -4,7 +4,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         exec: {
             cucumber: 'bundle exec cucumber',
-            editorconfig: 'git ls-files -z | grep -av patch | xargs -0 -r -n 100 eclint check',
             eslint: 'node node_modules/eslint/bin/eslint .',
             jsdoc: 'jsdoc -d html -r lib',
             jshint: 'node node_modules/jshint/bin/jshint .',
@@ -20,13 +19,11 @@ module.exports = function(grunt) {
     grunt.registerTask('test', ['exec:test']);
 
     grunt.registerTask('lint', [
-        'exec:editorconfig',
         'exec:eslint',
         'exec:jsfmt',
         'exec:jshint'
     ]);
 
-    grunt.registerTask('editorconfig', ['exec:editorconfig']);
     grunt.registerTask('eslint', ['exec:eslint']);
     grunt.registerTask('jsdoc', ['exec:jsdoc']);
     grunt.registerTask('jsfmt', ['exec:jsfmt']);
