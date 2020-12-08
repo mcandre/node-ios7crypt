@@ -17,12 +17,6 @@ branches:
   only:
   - "master"
 
-addons:
-  apt:
-    packages:
-    - "doxygen"
-    - "graphviz"
-
 script:
 - "cd \"$TRAVIS_BUILD_DIR\""
 - "sh publish-docs.sh"
