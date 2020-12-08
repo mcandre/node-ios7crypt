@@ -25,11 +25,11 @@ $ npm install [-g] ios7crypt
 
 # REQUIREMENTS
 
-* [Node.js](http://nodejs.org/) 6.9.1+
+* [Node.js](http://nodejs.org/) 14.15.1+
 
 ## Optional
 
-* [Ruby](https://www.ruby-lang.org/) 2.3+
+* [Ruby](https://www.ruby-lang.org/) 2.7+
 * [Bundler](http://bundler.io/)
 * [Cucumber](http://cukes.info/)
 * [Guard](http://guardgem.org/)
