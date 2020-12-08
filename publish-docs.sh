@@ -27,7 +27,7 @@ cd "$TRAVIS_BUILD_DIR"
 
 npm install -g grunt-cli jsdoc
 
-PACKAGEJSON_FILES="$(find . -path ./node_modules -prune -false -o -name package.json)"
+PACKAGEJSON_FILES="$(find . -path '*/node_modules/*' -prune -false -o -name package.json)"
 
 for PACKAGEJSON_FILE in $PACKAGEJSON_FILES; do
     PROJECT_BASE="$(dirname -- "$PACKAGEJSON_FILE")"
