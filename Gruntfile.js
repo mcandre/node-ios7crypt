@@ -6,7 +6,6 @@ module.exports = function(grunt) {
             cucumber: 'bundle exec cucumber',
             eslint: 'node node_modules/eslint/bin/eslint .',
             jsdoc: 'jsdoc -d html -r lib',
-            jshint: 'node node_modules/jshint/bin/jshint .',
             test: 'npm test'
         }
     });
@@ -19,13 +18,9 @@ module.exports = function(grunt) {
     grunt.registerTask('test', ['exec:test']);
 
     grunt.registerTask('lint', [
-        'exec:eslint',
-        'exec:jsfmt',
-        'exec:jshint'
+        'exec:eslint'
     ]);
 
     grunt.registerTask('eslint', ['exec:eslint']);
     grunt.registerTask('jsdoc', ['exec:jsdoc']);
-    grunt.registerTask('jsfmt', ['exec:jsfmt']);
-    grunt.registerTask('jshint', ['exec:jshint']);
 };

@@ -2,11 +2,12 @@
 
 'use strict';
 
-var argv = require('optimist')
+const _ = require('pkginfo')(module, 'version'),
+    argv = require('optimist')
         .string('e', 'd', 't', 'h', 'v')
         .argv,
-    _ = require('pkginfo')(module, 'version'),
-    ios7crypt = require('../lib/ios7crypt');
+    ios7crypt = require('../lib/ios7crypt')
+    process = require('process');
 
 function usage() {
     console.log('cli.js [options]');
@@ -19,31 +20,32 @@ function usage() {
 exports.usage = usage;
 
 function main() {
-    var password,
-        hash;
-
-    if ('e' in argv) {
-        password = argv.e;
+    if ('h' in argv) {
+        usage();
+        process.exit(0);
+    } else if ('e' in argv) {
+        const password = argv.e;
 
         if (password === undefined || password === true) {
             usage();
-        } else {
-            console.log(ios7crypt.encrypt(password));
+            process.exit(1);
         }
+
+        console.log(ios7crypt.encrypt(password));
     } else if ('d' in argv) {
-        hash = argv.d;
+        const hash = argv.d;
 
         if (hash === undefined || hash === true) {
             usage();
-        } else {
-            console.log(ios7crypt.decrypt(hash));
+            process.exit(1);
         }
-    } else if ('t' in argv) {
-        ios7crypt.test();
+
+        console.log(ios7crypt.decrypt(hash));
     } else if ('v' in argv) {
         console.log(module.exports.version);
     } else {
         usage();
+        process.exit(1);
     }
 }
 

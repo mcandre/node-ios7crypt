@@ -1,6 +1,6 @@
 'use strict';
 
-var fc = require('fast-check'),
+const fc = require('fast-check'),
     ios7crypt = require('../lib/ios7crypt');
 
 describe('ios7crypt', function() {

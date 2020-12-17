@@ -3,9 +3,10 @@
 # EXAMPLE
 
 ```
-$ ios7crypt-cli -e monkey
+$ ios7crypt -e monkey
 050609012a4957
-$ ios7crypt-cli -d 050609012a4957
+
+$ ios7crypt -d "050609012a4957"
 monkey
 ```
 
